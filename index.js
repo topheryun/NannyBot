@@ -1,6 +1,8 @@
 const fs = require('fs');
-const { Client, Collection, Intents } = require('discord.js');
-const { TOKEN } = require('./config.json');
+const { Client, Collection, Intents, Guild } = require('discord.js');
+const { ROLE_ID, GUILD_ID, TOKEN } = require('./config.json');
+const ping = require('./commands/ping');
+const { calculateAge } = require('./functions/age-calc');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
@@ -14,8 +16,31 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
-client.once('ready', () => {
-  console.log(`Feed me. Logged in as ${c.user.tag}`);
+client.once('ready', async () => {
+  console.log(`Feed me. Logged in as ${client.user.tag}`);
+
+	const Guilds = client.guilds.cache.map((guild) => guild);
+	const allFetchedCommands = await Guilds[0].commands.fetch();
+	fullPermissions = [];
+
+	// console.log(allFetchedCommands);
+
+	calculateAge(4,"Jul",1987);
+
+	allFetchedCommands.forEach(command => {
+		const tempCommandId = command.permissions.commandId;
+		fullPermissions.push({
+			id: tempCommandId,
+			permissions: [{
+				id: ROLE_ID,
+				type: 'ROLE',
+				permission: true
+			}]
+		});
+	})
+	
+
+	await Guilds[0].commands.permissions.set({ fullPermissions });
 });
 
 client.on('interactionCreate', async interaction => {
