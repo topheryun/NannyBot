@@ -47,13 +47,24 @@ module.exports = {
       .setDescription(`Chris' Age`))
 		.setDefaultPermission(false),
 	async execute(interaction) {
-		if (interaction.options.getSubcommand() === 'jojo') {
-      console.log(`${interaction.user.username} searched Jojo's age.`);
-      const age = calculateAge(JOJO_DAY,JOJO_MONTH,JOJO_YEAR)
-      await interaction.reply({
-        content: `Jojo's age is ${age.year} years, ${age.month} months, and ${age.day} days.`,
-        ephemeral: true
-      });
+    switch (interaction.options.getSubcommand()) {
+      case 'jojo': outputSubcommand(interaction, "Jojo", JOJO_DAY, JOJO_MONTH, JOJO_YEAR); break;
+      case 'shiloh': outputSubcommand(interaction, "Shiloh", SHILOH_DAY, SHILOH_MONTH, SHILOH_YEAR); break;
+      case 'ezra': outputSubcommand(interaction, "Ezra", EZRA_DAY, EZRA_MONTH, EZRA_YEAR); break;
+      case 'andrew': outputSubcommand(interaction, "Andrew", ANDREW_DAY, ANDREW_MONTH, ANDREW_YEAR); break;
+      case 'chanel': outputSubcommand(interaction, "Chanel", CHANEL_DAY, CHANEL_MONTH, CHANEL_YEAR); break;
+      case 'james': outputSubcommand(interaction, "James", JAMES_DAY, JAMES_MONTH, JAMES_YEAR); break;
+      case 'eunjung': outputSubcommand(interaction, "Eunjung", EUNJUNG_DAY, EUNJUNG_MONTH, EUNJUNG_YEAR); break;
+      case 'chris': outputSubcommand(interaction, "Chris", CHRIS_DAY, CHRIS_MONTH, CHRIS_YEAR); break;
     }
 	},
 };
+
+async function outputSubcommand(interaction, name, day, month, year) {
+  console.log(`${interaction.user.username} searched ${name}'s age.`);
+      const age = calculateAge(day,month,year);
+      await interaction.reply({
+        content: `${name}'s age is ${age.year} years, ${age.month} months, and ${age.day} days.`,
+        ephemeral: true
+      });
+}
