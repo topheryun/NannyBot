@@ -1,4 +1,3 @@
-// 93988c7064fb49e881b21832221801 kep for weatherapi.com
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const fetch = require("node-fetch");
 
