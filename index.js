@@ -17,15 +17,13 @@ for (const file of commandFiles) {
 }
 
 client.once('ready', async () => {
-  console.log(`Feed me. Logged in as ${client.user.tag}`);
+  console.log(`Logged in as ${client.user.tag}. Feed me...`);
 
 	const Guilds = client.guilds.cache.map((guild) => guild);
 	const allFetchedCommands = await Guilds[0].commands.fetch();
 	fullPermissions = [];
 
 	// console.log(allFetchedCommands);
-
-	calculateAge(4,"Jul",1987);
 
 	allFetchedCommands.forEach(command => {
 		const tempCommandId = command.permissions.commandId;
