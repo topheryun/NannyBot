@@ -80,38 +80,30 @@ module.exports = {
         ephemeral: true
       });
     }
-    else if (interaction.options.getSubcommand() === 'jojo') {
-      console.log(`${interaction.user.username} searched for Jojo's birthday.`);
-      await interaction.reply({content: `Jojo's Birthday: ` + displayBirthday(JOJO_DAY,JOJO_MONTH,JOJO_YEAR), ephemeral: true});
-    }
-    else if (interaction.options.getSubcommand() === 'shiloh') {
-      console.log(`${interaction.user.username} searched for Shiloh's birthday.`);
-      await interaction.reply({content: `Shiloh's Birthday: ` + displayBirthday(SHILOH_DAY,SHILOH_MONTH,SHILOH_YEAR), ephemeral: true});
-    }
-    else if (interaction.options.getSubcommand() === 'ezra') {
-      console.log(`${interaction.user.username} searched for Ezra's birthday.`);
-      await interaction.reply({content: `Ezra's Birthday: ` + displayBirthday(EZRA_DAY,EZRA_MONTH,EZRA_YEAR), ephemeral: true});
-    }
-    else if (interaction.options.getSubcommand() === 'andrew') {
-      console.log(`${interaction.user.username} searched for Andrew's birthday.`);
-      await interaction.reply({content: `Andrew's Birthday: ` + displayBirthday(ANDREW_DAY,ANDREW_MONTH,ANDREW_YEAR), ephemeral: true});
-    }
-    else if (interaction.options.getSubcommand() === 'chanel') {
-      console.log(`${interaction.user.username} searched for Chanel's birthday.`);
-      await interaction.reply({content: `Chanel's Birthday: ` + displayBirthday(CHANEL_DAY,CHANEL_MONTH,CHANEL_YEAR), ephemeral: true});
-    }
-    else if (interaction.options.getSubcommand() === 'james') {
-      console.log(`${interaction.user.username} searched for James' birthday.`);
-      await interaction.reply({content: `James' Birthday: ` + displayBirthday(JAMES_DAY,JAMES_MONTH,JAMES_YEAR), ephemeral: true});
-    }
-    else if (interaction.options.getSubcommand() === 'eunjung') {
-      console.log(`${interaction.user.username} searched for Eunjung's birthday.`);
-      await interaction.reply({content: `Eunjung's Birthday: ` + displayBirthday(EUNJUNG_DAY,EUNJUNG_MONTH,EUNJUNG_YEAR), ephemeral: true});
-    }
-    else if (interaction.options.getSubcommand() === 'chris') {
-      console.log(`${interaction.user.username} searched for Chris' birthday.`);
-      await interaction.reply({content: `Chris' Birthday: ` + displayBirthday(CHRIS_DAY,CHRIS_MONTH,CHRIS_YEAR), ephemeral: true});
-    }
+    else if (interaction.options.getSubcommand() === 'jojo')
+      outputSubcommand(interaction, "Jojo", JOJO_DAY, JOJO_MONTH, JOJO_YEAR);
+    else if (interaction.options.getSubcommand() === 'shiloh')
+      outputSubcommand(interaction, "Shiloh", SHILOH_DAY, SHILOH_MONTH, SHILOH_YEAR);
+    else if (interaction.options.getSubcommand() === 'ezra')
+      outputSubcommand(interaction, "Ezra", EZRA_DAY, EZRA_MONTH, EZRA_YEAR);
+    else if (interaction.options.getSubcommand() === 'andrew')
+      outputSubcommand(interaction, "Andrew", ANDREW_DAY, ANDREW_MONTH, ANDREW_YEAR);
+    else if (interaction.options.getSubcommand() === 'chanel')
+      outputSubcommand(interaction, "Chanel", CHANEL_DAY, CHANEL_MONTH, CHANEL_YEAR);
+    else if (interaction.options.getSubcommand() === 'james') 
+      outputSubcommand(interaction, "James", JAMES_DAY, JAMES_MONTH, JAMES_YEAR);
+    else if (interaction.options.getSubcommand() === 'eunjung') 
+      outputSubcommand(interaction, "Eujung", EUNJUNG_DAY, EUNJUNG_MONTH, EUNJUNG_YEAR);
+    else if (interaction.options.getSubcommand() === 'chris') 
+      outputSubcommand(interaction, "Chris", CHRIS_DAY, CHRIS_MONTH, CHRIS_YEAR);
     else return;
 	},
 };
+
+async function outputSubcommand(interaction, name, day, month, year) {
+  console.log(`${interaction.user.username} searched for ${name}' birthday.`);
+  await interaction.reply({
+    content: `${name}'s Birthday: ` + displayBirthday(day,month,year),
+    ephemeral: true
+  });
+}
