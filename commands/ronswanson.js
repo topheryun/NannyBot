@@ -10,7 +10,7 @@ module.exports = {
     const response = await fetch("http://ron-swanson-quotes.herokuapp.com/v2/quotes");
     if (response.status == 200) {
       const data = await response.json();
-      await interaction.reply({content: `${data}`, ephemeral: true});
+      await interaction.reply({content: `"${data}"\n-Ron Swanson`, ephemeral: true});
     }	
 	}
 };
