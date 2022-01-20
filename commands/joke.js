@@ -5,7 +5,6 @@ module.exports = {
 	data: new SlashCommandBuilder()
 	.setName('joke')
 	.setDescription('I will attempt a joke.')
-	.setDefaultPermission(false)
 	.addSubcommand(subcommand =>
 		subcommand
 			.setName('oneliner')
