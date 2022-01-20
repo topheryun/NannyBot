@@ -3,8 +3,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('help')
-		.setDescription('Just gives you all commands available.')
-		.setDefaultPermission(false),
+		.setDescription('Just gives you all commands available.'),
 	async execute(interaction) {
     console.log(`${interaction.user.username} asked for help.`);
 		await interaction.reply({

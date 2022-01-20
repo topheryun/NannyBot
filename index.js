@@ -1,8 +1,7 @@
 const fs = require('fs');
-const { Client, Collection, Intents, Guild } = require('discord.js');
-const { ROLE_ID, GUILD_ID, TOKEN } = require('./config.json');
+const { Client, Collection, Intents } = require('discord.js');
+const { ROLE_ID, TOKEN } = require('./config.json');
 const ping = require('./commands/ping');
-const { calculateAge } = require('./functions/age-calc');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
