@@ -8,7 +8,7 @@ module.exports = {
 	async execute(interaction) {
     console.log(`${interaction.user.username} asked for help.`);
 		await interaction.reply({
-      content: `age\nbirthday\njoke\nweather`,
+      content: `age\nbirthday\nchucknorris\njoke\nronswanson\nweather`,
       ephemeral: true
     });
 	},
