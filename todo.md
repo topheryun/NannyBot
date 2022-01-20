@@ -1,6 +1,5 @@
 # things to do
 ## api integration
-- [Cats](https://alexwohlbruck.github.io/cat-facts/?ref=apilist.fun)
 - [Anime](https://jikan.moe/)
 - [Poems](https://poems.one/api/poem/)
 - [Game Deals](https://apidocs.cheapshark.com/?version=latest#intro)
