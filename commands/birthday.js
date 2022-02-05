@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { displayBirthday } = require('./../functions/birthday-display');
+const { displayBirthday, replyBirthday } = require('./../functions/display');
 const { JOJO_DAY, JOJO_MONTH, JOJO_YEAR } = require('./../birthdays.json');
 const { SHILOH_DAY, SHILOH_MONTH, SHILOH_YEAR } = require('./../birthdays.json');
 const { EZRA_DAY, EZRA_MONTH, EZRA_YEAR } = require('./../birthdays.json');
@@ -13,46 +13,16 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('bday')
 		.setDescription('Birthdays')
-    .addSubcommand(subcommand =>
-      subcommand
-      .setName('all')
-      .setDescription(`Everyone's Birthday`))
-    .addSubcommand(subcommand =>
-      subcommand
-      .setName('kids')
-      .setDescription(`Children's Birthday`))
-    .addSubcommand(subcommand =>
-      subcommand
-      .setName('jojo')
-      .setDescription(`Jojo's Birthday`))
-    .addSubcommand(subcommand =>
-      subcommand
-      .setName('shiloh')
-      .setDescription(`Shiloh's Birthday`))
-    .addSubcommand(subcommand =>
-      subcommand
-      .setName('ezra')
-      .setDescription(`Ezra's Birthday`))
-    .addSubcommand(subcommand =>
-      subcommand
-      .setName('andrew')
-      .setDescription(`Andrew's Birthday`))
-    .addSubcommand(subcommand =>
-      subcommand
-      .setName('chanel')
-      .setDescription(`Chanel's Birthday`))
-    .addSubcommand(subcommand =>
-      subcommand
-      .setName('james')
-      .setDescription(`James' Birthday`))
-    .addSubcommand(subcommand =>
-      subcommand
-      .setName('eunjung')
-      .setDescription(`Eunjung's Birthday`))
-    .addSubcommand(subcommand =>
-      subcommand
-      .setName('chris')
-      .setDescription(`Chris' Birthday`))
+    .addSubcommand(subcommand => subcommand.setName('all').setDescription(`Everyone's Birthday`))
+    .addSubcommand(subcommand => subcommand.setName('kids').setDescription(`Children's Birthday`))
+    .addSubcommand(subcommand => subcommand.setName('jojo').setDescription(`Jojo's Birthday`))
+    .addSubcommand(subcommand => subcommand.setName('shiloh').setDescription(`Shiloh's Birthday`))
+    .addSubcommand(subcommand => subcommand.setName('ezra').setDescription(`Ezra's Birthday`))
+    .addSubcommand(subcommand => subcommand.setName('andrew').setDescription(`Andrew's Birthday`))
+    .addSubcommand(subcommand => subcommand.setName('chanel').setDescription(`Chanel's Birthday`))
+    .addSubcommand(subcommand => subcommand.setName('james').setDescription(`James' Birthday`))
+    .addSubcommand(subcommand => subcommand.setName('eunjung').setDescription(`Eunjung's Birthday`))
+    .addSubcommand(subcommand => subcommand.setName('chris').setDescription(`Chris' Birthday`))
 		.setDefaultPermission(false),
 	async execute(interaction) {
     if (interaction.options.getSubcommand() === 'all') {
@@ -81,29 +51,20 @@ module.exports = {
       });
     }
     else if (interaction.options.getSubcommand() === 'jojo')
-      outputSubcommand(interaction, "Jojo", JOJO_DAY, JOJO_MONTH, JOJO_YEAR);
+      replyBirthday(interaction, "Jojo", JOJO_DAY, JOJO_MONTH, JOJO_YEAR);
     else if (interaction.options.getSubcommand() === 'shiloh')
-      outputSubcommand(interaction, "Shiloh", SHILOH_DAY, SHILOH_MONTH, SHILOH_YEAR);
+      replyBirthday(interaction, "Shiloh", SHILOH_DAY, SHILOH_MONTH, SHILOH_YEAR);
     else if (interaction.options.getSubcommand() === 'ezra')
-      outputSubcommand(interaction, "Ezra", EZRA_DAY, EZRA_MONTH, EZRA_YEAR);
+      replyBirthday(interaction, "Ezra", EZRA_DAY, EZRA_MONTH, EZRA_YEAR);
     else if (interaction.options.getSubcommand() === 'andrew')
-      outputSubcommand(interaction, "Andrew", ANDREW_DAY, ANDREW_MONTH, ANDREW_YEAR);
+      replyBirthday(interaction, "Andrew", ANDREW_DAY, ANDREW_MONTH, ANDREW_YEAR);
     else if (interaction.options.getSubcommand() === 'chanel')
-      outputSubcommand(interaction, "Chanel", CHANEL_DAY, CHANEL_MONTH, CHANEL_YEAR);
+      replyBirthday(interaction, "Chanel", CHANEL_DAY, CHANEL_MONTH, CHANEL_YEAR);
     else if (interaction.options.getSubcommand() === 'james') 
-      outputSubcommand(interaction, "James", JAMES_DAY, JAMES_MONTH, JAMES_YEAR);
+      replyBirthday(interaction, "James", JAMES_DAY, JAMES_MONTH, JAMES_YEAR);
     else if (interaction.options.getSubcommand() === 'eunjung') 
-      outputSubcommand(interaction, "Eujung", EUNJUNG_DAY, EUNJUNG_MONTH, EUNJUNG_YEAR);
+      replyBirthday(interaction, "Eujung", EUNJUNG_DAY, EUNJUNG_MONTH, EUNJUNG_YEAR);
     else if (interaction.options.getSubcommand() === 'chris') 
-      outputSubcommand(interaction, "Chris", CHRIS_DAY, CHRIS_MONTH, CHRIS_YEAR);
-    else return;
+      replyBirthday(interaction, "Chris", CHRIS_DAY, CHRIS_MONTH, CHRIS_YEAR);
 	},
 };
-
-async function outputSubcommand(interaction, name, day, month, year) {
-  console.log(`${interaction.user.username} searched for ${name}' birthday.`);
-  await interaction.reply({
-    content: `${name}'s Birthday: ` + displayBirthday(day,month,year),
-    ephemeral: true
-  });
-}

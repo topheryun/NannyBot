@@ -10,4 +10,4 @@
 - create /jojo which will give her birthday and age?
 
 ## cat.js
-- sometimes crashes nanny.
+- sometimes crashes nanny. - might have been fixed?
