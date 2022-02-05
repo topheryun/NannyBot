@@ -8,3 +8,6 @@
 ## fix birthday and age
 - needs to be more modular. put functions in different files. 
 - create /jojo which will give her birthday and age?
+
+## cat.js
+- sometimes crashes nanny.

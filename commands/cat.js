@@ -10,7 +10,7 @@ module.exports = {
     const response = await fetch("https://api.thecatapi.com/v1/images/search");
     if (response.status == 200) {
       const data = await response.json();
-      await interaction.reply({files: [data[0].url], ephemeral: true});
+      if(data[0].url) await interaction.reply({files: [data[0].url], ephemeral: true});
     }	
 	}
 };
