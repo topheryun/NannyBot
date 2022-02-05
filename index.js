@@ -1,7 +1,6 @@
 const fs = require('fs');
 const { Client, Collection, Intents } = require('discord.js');
 const { ROLE_ID, TOKEN } = require('./config.json');
-const ping = require('./commands/ping');
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 

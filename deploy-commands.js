@@ -6,10 +6,16 @@ const { CLIENT_ID, GUILD_ID, TOKEN } = require('./config.json');
 const commands = [];
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
+let printFiles = '[ ';
+
 for (const file of commandFiles) {
+	printFiles += `${file}, `;
 	const command = require(`./commands/${file}`);
 	commands.push(command.data.toJSON());
 }
+
+printFiles += ']';
+console.log(printFiles);
 
 const rest = new REST({ version: '9' }).setToken(TOKEN);
 
