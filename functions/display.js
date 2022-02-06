@@ -4,10 +4,21 @@ function displayBirthday(day,month,year) {
   return `${year}-${month}-${day}`;
 }
 
-async function replyBirthday(interaction, name, day, month, year) {
-  console.log(`${interaction.user.username} searched for ${name}' birthday.`);
+async function replyBirthday(interaction, data) {
+  console.log(`${interaction.user.username} searched for ${data.name}' birthday.`);
   await interaction.reply({
-    content: `${name}'s Birthday: ` + displayBirthday(day,month,year),
+    content: `${data.name}'s Birthday: ` + displayBirthday(data.day,data.month,data.year),
+    ephemeral: true
+  });
+}
+
+async function replyMultiBirthday(interaction, people) {
+  let replyMessage = '';
+  for (const person of people) {
+    replyMessage += `${person.name}'s Birthday: ` + displayBirthday(person.day,person.month,person.year) + '\n'
+  }
+  await interaction.reply({ 
+    content: replyMessage,
     ephemeral: true
   });
 }
@@ -24,5 +35,6 @@ async function replyAge(interaction, name, day, month, year) {
 module.exports = {
   displayBirthday,
   replyBirthday,
-  replyAge
+  replyAge,
+  replyMultiBirthday
 }
