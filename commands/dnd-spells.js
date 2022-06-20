@@ -29,7 +29,8 @@ module.exports = {
           }
           
         }
-        await interaction.reply({content: [outputString1, outputString2], ephemeral: true});
+        let message = [outputString1,outputString2];
+        await interaction.reply({content: message, ephemeral: true});
       }
     }
     else {
