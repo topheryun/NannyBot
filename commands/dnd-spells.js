@@ -15,11 +15,21 @@ module.exports = {
       const response = await fetch("https://www.dnd5eapi.co/api/spells/");
       if (response.status == 200) {
         const data = await response.json();
-        let outputString = "";
+        let outputString1 = "";
+        let outputString2 = "";
+        const limit = 70;
+        let count = 0;
         for (const result in data.results) {
-          outputString += result.index + ", ";
+          count++;
+          if (count < limit) {
+            outputString1 += result.index + ", ";
+          }
+          else {
+            outputString2 += result.index + ", ";
+          }
+          
         }
-        await interaction.reply({content: outputString, ephemeral: true});
+        await interaction.reply({content: [outputString1, outputString2], ephemeral: true});
       }
     }
     else {
