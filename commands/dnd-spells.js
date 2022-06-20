@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('dndspells')
-		.setDescription('Searches for cards via Scryfall.')
+		.setDescription('Searches for D&D Spells.')
     .addStringOption(option =>
       option.setName('input')
       .setDescription('The input to echo back')
