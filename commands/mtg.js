@@ -15,7 +15,7 @@ module.exports = {
       const response = await fetch("https://api.scryfall.com/cards/random");
       if (response.status == 200) {
         const data = await response.json();
-        await interaction.reply({files: [data.image_uris.large], ephemeral: true});
+        await interaction.reply({files: [data.image_uris.normal], ephemeral: true});
       }
     }
     else {
@@ -31,7 +31,7 @@ module.exports = {
       let response = await fetch("https://api.scryfall.com/cards/named?fuzzy=" + fuzzyAppend);
       if (response.status == 200) {
         const data = await response.json();
-        await interaction.reply({files: [data.image_uris.large], ephemeral: false});
+        await interaction.reply({files: [data.image_uris.normal], ephemeral: false});
       }
       else if (response.status == 404) {
         response = await fetch("https://api.scryfall.com/cards/autocomplete?q=" + autocompleteAppend);
