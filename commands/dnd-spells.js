@@ -30,6 +30,8 @@ module.exports = {
           
         }
         // let message = [outputString1,outputString2];
+        console.log(outputString1);
+        console.log(outputString2);
         await interaction.reply({content: outputString1, ephemeral: true});
         await interaction.followup({content: outputString2, ephemeral: true});
       }
