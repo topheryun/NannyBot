@@ -4,10 +4,8 @@ const fetch = require("node-fetch");
 const { chris_puuid, chanel_puuid, eunjung_puuid, james_puuid } = require('./../aram.json');
 const baseURL = "https://americas.api.riotgames.com";
 const apiKey = "RGAPI-7a04de10-b29a-48bb-84a2-55c70a1054e2";
-const hardcodedMatchId = "NA1_4662533119";
-let matchData = {"championName": "", "win": "", "kills": "", "deaths": "", "assists": "", "kda": "", "totalDamageDealtToChampions": "", "damagePerMinute": ""};
 
-insertMatchData(hardcodedMatchId);
+// insertMatchData(hardcodedMatchId);
 
 // get match data with matchId
 async function insertMatchData(matchId) {
