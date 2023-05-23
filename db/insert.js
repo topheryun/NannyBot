@@ -20,7 +20,7 @@ async function insertMatchData(matchId) {
         || players[i].puuid == chanel_puuid 
         || players[i].puuid == eunjung_puuid 
         || players[i].puuid == james_puuid) {
-        console.log("inserting puuid: " + players[i].summonerName);
+        console.log("found summoner: " + players[i].summonerName);
         insertIntoDB(players[i], getPlayerName(players[i].puuid), matchId);
       }
     }
@@ -42,11 +42,9 @@ function insertIntoDB(player, playerName, matchId) {
   // insert into db
   con.connect(function(err) {
     if (err) throw err;
-    console.log("Connected!");
-    var sql = `INSERT INTO ${playerName} (${tableHeaders}) VALUES ('${matchId}', '${player.championName}', ${player.win}, ${player.kills}, ${player.deaths}, ${player.assists}, ${player.challenges.kda}, ${player.totalDamageDealtToChampions}, ${player.challenges.damagePerMinute});`;
+    var sql = `INSERT IGNORE INTO ${playerName} (${tableHeaders}) VALUES ('${matchId}', '${player.championName}', ${player.win}, ${player.kills}, ${player.deaths}, ${player.assists}, ${player.challenges.kda}, ${player.totalDamageDealtToChampions}, ${player.challenges.damagePerMinute});`;
     con.query(sql, function (err, result) {
       if (err) throw err;
-      console.log("1 record inserted");
     });
   });
 }
