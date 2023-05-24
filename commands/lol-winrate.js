@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 var mysql = require('mysql');
-let chanelWR, chrisWR, eunjungWR, jamesWR;
+// let chanelWR, chrisWR, eunjungWR, jamesWR;
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -26,24 +26,17 @@ module.exports = {
       "SELECT win FROM james;"
       , function (err, results, fields) {
         if (err) throw err;
-        chanelWR = calculateWinRate(results[0]);
-        chrisWR = calculateWinRate(results[1]);
-        eunjungWR = calculateWinRate(results[2]);
-        jamesWR = calculateWinRate(results[3]);
-        console.log(chanelWR);
+        chanelWR = (Math.round(calculateWinRate(results[0]) * 10000) / 100).toFixed(2) + '%';
+        chrisWR = (Math.round(calculateWinRate(results[1]) * 10000) / 100).toFixed(2) + '%';
+        eunjungWR = (Math.round(calculateWinRate(results[2]) * 10000) / 100).toFixed(2) + '%';
+        jamesWR = (Math.round(calculateWinRate(results[3]) * 10000) / 100).toFixed(2) + '%';
+
+        interaction.reply({content: "```\nWinrates\n" + "+--------+--------+---------+--------+\n" +
+        "| Chanel |  Chris | Eunjung |  James |\n+--------+--------+---------+--------+\n" +
+        "| " + chanelWR + " | " + chrisWR + " | " + eunjungWR + "  | " + jamesWR +
+        " |\n+--------+--------+---------+--------+" + "```", ephemeral: true});
       });
     });
-// ```
-// +--------+--------+---------+--------+
-// | Chanel |  Chris | Eunjung |  James |
-// +--------+--------+---------+--------+
-// | 11.11% | 11.11% |  11.11% | 11.11% |
-// +--------+--------+---------+--------+
-// ```
-    await interaction.reply({content: "```\n" + "+--------+--------+---------+--------+\n" +
-    "| Chanel |  Chris | Eunjung |  James |\n+--------+--------+---------+--------+\n" +
-    "| " + chanelWR + " | " + chrisWR + " | " + eunjungWR + " | " + jamesWR +
-    " |\n+--------+--------+---------+--------+" + "```", ephemeral: true});
 	},
 };
 
