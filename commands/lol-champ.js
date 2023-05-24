@@ -31,13 +31,16 @@ module.exports = {
       "SELECT * FROM james WHERE championName = '" + input + "';"
       , function (err, results, fields) {
         if (err) throw err;
-        chanelWR = formatWinRate(results[0]); chanelKDA = formatKDA(results[0]);
-        chrisWR = formatWinRate(results[1]); chrisKDA = formatKDA(results[1]);
-        eunjungWR = formatWinRate(results[2]); eunjungKDA = formatKDA(results[2]);
-        jamesWR = formatWinRate(results[3]); jamesKDA = formatKDA(results[3]);
-        
+        if (results[0][0] == null && results[0][1] == null && results[0][2] == null && results[0][3] == null) {
+          interaction.reply({content: `Could not find any data on "${input}"`, ephemeral: true});
+        }
+        chanelWR = formatWinRate(results[0]); chanelKDA = formatKDA(results[0]); chanelFrequency = formatFrequency(results[0]);
+        chrisWR = formatWinRate(results[1]); chrisKDA = formatKDA(results[1]); chrisFrequency = formatFrequency(results[1]);
+        eunjungWR = formatWinRate(results[2]); eunjungKDA = formatKDA(results[2]); eunjungFrequency = formatFrequency(results[2]);
+        jamesWR = formatWinRate(results[3]); jamesKDA = formatKDA(results[3]); jamesFrequency = formatFrequency(results[3]);
+      
         // +------------------------------------------------+
-        // |                    Champion                    |
+        // |                 Champion Stats                 |
         // +-----------+--------+--------+---------+--------+
         // |  Summoner | Chanel |  Chris | Eunjung |  James |
         // +-----------+--------+--------+---------+--------+
@@ -48,18 +51,20 @@ module.exports = {
         // | Frequency |   xx   |   xx   |    xx   |   xx   |
         // +-----------+--------+--------+---------+--------+
 
-        interaction.reply({content: "```\n+------------------------------------+\n" + 
-        "|                 KDA                |\n" + "+--------+--------+---------+--------+\n" +
-        "| Chanel |  Chris | Eunjung |  James |\n+--------+--------+---------+--------+\n" +
-        "|  " + chanelKDA + " |  " + chrisKDA + " |  " + eunjungKDA + "  |  " + jamesKDA +
-        " |\n+--------+--------+---------+--------+" + "```", ephemeral: true});
+        interaction.reply({content: `**.-${input}-.**` +
+        "```\n+------------------------------------------------+\n" + 
+        "|                 Champion Stats                 |\n+-----------+--------+--------+---------+--------+\n" + 
+        "|  Summoner | Chanel |  Chris | Eunjung |  James |\n+-----------+--------+--------+---------+--------+\n" +
+        `|  Winrate  | ${chanelWR} | ${chrisWR} |  ${eunjungWR} | ${jamesWR} |\n+-----------+--------+--------+---------+--------+\n` +
+        `|    KDA    |  ${chanelKDA} |  ${chrisKDA} |  ${eunjungKDA}  |  ${jamesKDA} |\n+-----------+--------+--------+---------+--------+\n` +
+        `| Frequency |   ${chanelFrequency}   |   ${chrisFrequency}   |    ${eunjungFrequency}   |   ${jamesFrequency}   |\n+-----------+--------+--------+---------+--------+\n` +
+        "```", ephemeral: true});
       });
     });
 	},
 };
 
 function formatWinRate(result) {
-  console.log(result);
   if (result[0] == null) return 'xx.xx%';
 
   let formattedResult = (Math.round(calculateWinRate(result) * 10000) / 100).toFixed(2) + '%';
@@ -84,9 +89,9 @@ function formatKDA(result) {
   if (result[0] == null) return 'xx.xx';
 
   let formattedResult = (Math.round(calculateKDA(result) * 100) / 100).toFixed(2) + '';
-  // if (formattedResult.length == 4) {
-  //   formattedResult = ' ' + formattedResult;
-  // }
+  if (formattedResult.length == 4) {
+    formattedResult = ' ' + formattedResult;
+  }
   return formattedResult;
 }
 
@@ -96,4 +101,9 @@ function calculateKDA(result) {
     average += result[i].kda;
   }
   return average / result.length;
+}
+
+function formatFrequency(result) {
+  if (result.length < 10) return ' ' + result.length;
+  else return '' + result.length;
 }
