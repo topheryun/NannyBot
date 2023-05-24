@@ -25,16 +25,17 @@ module.exports = {
       "SELECT win FROM james;"
       , function (err, results, fields) {
         if (err) throw err;
-        chanelWR = (Math.round(calculateWinRate(results[0]) * 10000) / 100).toFixed(2) + '%';
-        chrisWR = (Math.round(calculateWinRate(results[1]) * 10000) / 100).toFixed(2) + '%';
-        eunjungWR = (Math.round(calculateWinRate(results[2]) * 10000) / 100).toFixed(2) + '%';
-        jamesWR = (Math.round(calculateWinRate(results[3]) * 10000) / 100).toFixed(2) + '%';
+        chanelWR = (Math.round(calculateWinRate(results[0]) * 10000) / 100).toFixed(2) + '%'; chanelGamesPlayed = formatGamesPlayed(results[0].length);
+        chrisWR = (Math.round(calculateWinRate(results[1]) * 10000) / 100).toFixed(2) + '%'; chrisGamesPlayed = formatGamesPlayed(results[1].length);
+        eunjungWR = (Math.round(calculateWinRate(results[2]) * 10000) / 100).toFixed(2) + '%'; eunjungGamesPlayed = formatGamesPlayed(results[2].length);
+        jamesWR = (Math.round(calculateWinRate(results[3]) * 10000) / 100).toFixed(2) + '%'; jamesGamesPlayed = formatGamesPlayed(results[3].length);
 
         interaction.reply({content: "```\n+------------------------------------+\n" + 
         "|              Winrates              |\n" + "+--------+--------+---------+--------+\n" +
         "| Chanel |  Chris | Eunjung |  James |\n+--------+--------+---------+--------+\n" +
-        "| " + chanelWR + " | " + chrisWR + " | " + eunjungWR + "  | " + jamesWR +
-        " |\n+--------+--------+---------+--------+" + "```", ephemeral: true});
+        `| ${chanelWR} | ${chrisWR} |  ${eunjungWR} | ${jamesWR} |` + "\n+--------+--------+---------+--------+\n" + 
+        `|  ${chanelGamesPlayed}   |  ${chrisGamesPlayed}   |  ${eunjungGamesPlayed}    |  ${jamesGamesPlayed}   |\n` +
+        "+--------+--------+---------+--------+\n```", ephemeral: true});
       });
     });
 	},
@@ -46,4 +47,9 @@ function calculateWinRate(result) {
     if (result[i].win == 1) wins++;
   }
   return (wins / result.length);
+}
+
+function formatGamesPlayed(number) {
+  if (number < 100) return ' ' + number;
+  else return number;
 }

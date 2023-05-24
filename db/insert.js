@@ -16,7 +16,6 @@ async function insertMatchData(matchId) {
         || players[i].puuid == chanel_puuid 
         || players[i].puuid == eunjung_puuid 
         || players[i].puuid == james_puuid) {
-        console.log("found summoner: " + players[i].summonerName);
         insertIntoDB(players[i], getPlayerName(players[i].puuid), matchId);
       }
     }

@@ -14,7 +14,6 @@ module.exports = {
     const response = await fetch(`${baseURL}/lol/match/v5/matches/by-puuid/${chris_puuid}/ids?start=0&count=15&api_key=${apiKey}`);
     if (response.status == 200) {
       const data = await response.json();
-      console.log(data);
       for (let i = 0; i < data.length; i++) {
         insertMatchData(data[i]);
       }

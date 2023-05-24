@@ -7,11 +7,10 @@ module.exports = {
 		.setDescription('ARAM Champion Stats')
     .addStringOption(option =>
       option.setName('input')
-      .setDescription('The input to echo back')
+      .setDescription('Champion Name')
       .setRequired(true)),
 	async execute(interaction) {
     console.log(`${interaction.user.username} is check ${interaction.options.getString('input')} stats.`);
-
     const input = interaction.options.getString('input');
 
     var con = mysql.createConnection({
@@ -54,7 +53,7 @@ module.exports = {
       });
     });
 	},
-};
+}
 
 function formatWinRate(result) {
   if (result[0] == null) return 'xx.xx%';
