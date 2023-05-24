@@ -10,7 +10,7 @@ module.exports = {
       .setDescription('The input to echo back')
       .setRequired(true)),
 	async execute(interaction) {
-    console.log(`${interaction.user.username} is check champion stats.`);
+    console.log(`${interaction.user.username} is check ${interaction.options.getString('input')} stats.`);
 
     const input = interaction.options.getString('input');
 
@@ -31,15 +31,10 @@ module.exports = {
       "SELECT * FROM james WHERE championName = '" + input + "';"
       , function (err, results, fields) {
         if (err) throw err;
-        // console.log("results:")
-        // console.log(results)
-        // console.log("results[0]:")
-        // console.log(results[0])
-     
-        chanelWR = formatWinRate(results[0]);
-        chrisWR = formatWinRate(results[1]);
-        eunjungWR = formatWinRate(results[2]);
-        jamesWR = formatWinRate(results[3]);
+        chanelWR = formatWinRate(results[0]); chanelKDA = formatKDA(results[0]);
+        chrisWR = formatWinRate(results[1]); chrisKDA = formatKDA(results[1]);
+        eunjungWR = formatWinRate(results[2]); eunjungKDA = formatKDA(results[2]);
+        jamesWR = formatWinRate(results[3]); jamesKDA = formatKDA(results[3]);
         
         // +------------------------------------------------+
         // |                    Champion                    |
@@ -54,14 +49,28 @@ module.exports = {
         // +-----------+--------+--------+---------+--------+
 
         interaction.reply({content: "```\n+------------------------------------+\n" + 
-        "|              Winrates              |\n" + "+--------+--------+---------+--------+\n" +
+        "|                 KDA                |\n" + "+--------+--------+---------+--------+\n" +
         "| Chanel |  Chris | Eunjung |  James |\n+--------+--------+---------+--------+\n" +
-        "| " + chanelWR + " | " + chrisWR + " | " + eunjungWR + "  | " + jamesWR +
+        "|  " + chanelKDA + " |  " + chrisKDA + " |  " + eunjungKDA + "  |  " + jamesKDA +
         " |\n+--------+--------+---------+--------+" + "```", ephemeral: true});
       });
     });
 	},
 };
+
+function formatWinRate(result) {
+  console.log(result);
+  if (result[0] == null) return 'xx.xx%';
+
+  let formattedResult = (Math.round(calculateWinRate(result) * 10000) / 100).toFixed(2) + '%';
+  if (formattedResult == '0.00%') {
+    return '00.00%';
+  }
+  else if (formattedResult == '100.00%') {
+    return '100.0%';
+  }
+  return formattedResult;
+}
 
 function calculateWinRate(result) {
   let wins = 0;
@@ -71,19 +80,20 @@ function calculateWinRate(result) {
   return (wins / result.length);
 }
 
-function formatWinRate(result) {
-  console.log(result);
-  if (result[0] == null) return 'xx.xx%';
+function formatKDA(result) {
+  if (result[0] == null) return 'xx.xx';
 
-  let formattedResult = (Math.round(calculateWinRate(result) * 10000) / 100).toFixed(2) + '%';
-  if (formattedResult == 'NaN%') {
-    return '00.00%';
-  }
-  else if (formattedResult == '0.00%') {
-    return '00.00%';
-  }
-  else if (formattedResult == '100.00%') {
-    return '100.0%';
-  }
+  let formattedResult = (Math.round(calculateKDA(result) * 100) / 100).toFixed(2) + '';
+  // if (formattedResult.length == 4) {
+  //   formattedResult = ' ' + formattedResult;
+  // }
   return formattedResult;
+}
+
+function calculateKDA(result) {
+  let average = 0;
+  for (let i = 0; i < result.length; i++) {
+    average += result[i].kda;
+  }
+  return average / result.length;
 }
