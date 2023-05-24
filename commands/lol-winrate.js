@@ -1,6 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 var mysql = require('mysql');
-// let chanelWR, chrisWR, eunjungWR, jamesWR;
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -31,7 +30,8 @@ module.exports = {
         eunjungWR = (Math.round(calculateWinRate(results[2]) * 10000) / 100).toFixed(2) + '%';
         jamesWR = (Math.round(calculateWinRate(results[3]) * 10000) / 100).toFixed(2) + '%';
 
-        interaction.reply({content: "```\nWinrates\n" + "+--------+--------+---------+--------+\n" +
+        interaction.reply({content: "```\n+------------------------------------+\n" + 
+        "|              Winrates              |\n" + "+--------+--------+---------+--------+\n" +
         "| Chanel |  Chris | Eunjung |  James |\n+--------+--------+---------+--------+\n" +
         "| " + chanelWR + " | " + chrisWR + " | " + eunjungWR + "  | " + jamesWR +
         " |\n+--------+--------+---------+--------+" + "```", ephemeral: true});
