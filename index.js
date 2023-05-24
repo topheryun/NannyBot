@@ -40,27 +40,26 @@ client.once('ready', async () => {
 			}]
 		});
 	})
-	
 
 	const permissions2 = {
 		id: guild.roles.everyone.id,
 		type: 'ROLE',
 		permission: false,
-};
-const permissions1 =  {
+	};
+	const permissions1 =  {
 		id: botRole.id,
 		type: 'ROLE',
 		permission: true,
-};
-let commandsList = await guild.commands.fetch();
-await commandsList.forEach(slashCommand => {
+	};
+	let commandsList = await guild.commands.fetch();
+	await commandsList.forEach(slashCommand => {
 		console.log(`Changing command ${slashCommand.id}`);
 		//set the permissions for each slashCommand
 		guild.commands.permissions.add({
 				command: slashCommand.id,
 				permissions: [permissions1, permissions2]
 		});
-});
+	});
 	// await Guilds[0].commands.permissions.set({ fullPermissions });
 });
 
