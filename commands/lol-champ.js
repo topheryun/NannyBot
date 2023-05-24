@@ -31,34 +31,26 @@ module.exports = {
       "SELECT * FROM james WHERE championName = '" + input + "';"
       , function (err, results, fields) {
         if (err) throw err;
-        if (results[0][0] == null && results[0][1] == null && results[0][2] == null && results[0][3] == null) {
-          interaction.reply({content: `Could not find any data on "${input}"`, ephemeral: true});
-        }
+        // console.log("results"); console.log(results[0]);
         chanelWR = formatWinRate(results[0]); chanelKDA = formatKDA(results[0]); chanelFrequency = formatFrequency(results[0]);
         chrisWR = formatWinRate(results[1]); chrisKDA = formatKDA(results[1]); chrisFrequency = formatFrequency(results[1]);
         eunjungWR = formatWinRate(results[2]); eunjungKDA = formatKDA(results[2]); eunjungFrequency = formatFrequency(results[2]);
         jamesWR = formatWinRate(results[3]); jamesKDA = formatKDA(results[3]); jamesFrequency = formatFrequency(results[3]);
-      
-        // +------------------------------------------------+
-        // |                 Champion Stats                 |
-        // +-----------+--------+--------+---------+--------+
-        // |  Summoner | Chanel |  Chris | Eunjung |  James |
-        // +-----------+--------+--------+---------+--------+
-        // |  Winrate  | xx.xx% | xx.xx% |  xx.xx% | xx.xx% |
-        // +-----------+--------+--------+---------+--------+
-        // |    KDA    |  xx.xx |  xx.xx |  xx.xx  |  xx.xx |
-        // +-----------+--------+--------+---------+--------+
-        // | Frequency |   xx   |   xx   |    xx   |   xx   |
-        // +-----------+--------+--------+---------+--------+
 
-        interaction.reply({content: `**.-${input}-.**` +
-        "```\n+------------------------------------------------+\n" + 
-        "|                 Champion Stats                 |\n+-----------+--------+--------+---------+--------+\n" + 
-        "|  Summoner | Chanel |  Chris | Eunjung |  James |\n+-----------+--------+--------+---------+--------+\n" +
-        `|  Winrate  | ${chanelWR} | ${chrisWR} |  ${eunjungWR} | ${jamesWR} |\n+-----------+--------+--------+---------+--------+\n` +
-        `|    KDA    |  ${chanelKDA} |  ${chrisKDA} |  ${eunjungKDA}  |  ${jamesKDA} |\n+-----------+--------+--------+---------+--------+\n` +
-        `| Frequency |   ${chanelFrequency}   |   ${chrisFrequency}   |    ${eunjungFrequency}   |   ${jamesFrequency}   |\n+-----------+--------+--------+---------+--------+\n` +
-        "```", ephemeral: true});
+        if (chanelFrequency == ' 0' && chrisFrequency == ' 0' && eunjungFrequency == ' 0' && jamesFrequency == ' 0') {
+          interaction.reply({content: `Could not find any data on "${input}"`, ephemeral: true});
+        }
+        else {
+          interaction.reply({content: `**.-${input}-.**` +
+          "```\n+------------------------------------------------+\n" + 
+          "|                 Champion Stats                 |\n+-----------+--------+--------+---------+--------+\n" + 
+          "|  Summoner | Chanel |  Chris | Eunjung |  James |\n+-----------+--------+--------+---------+--------+\n" +
+          `|  Winrate  | ${chanelWR} | ${chrisWR} |  ${eunjungWR} | ${jamesWR} |\n+-----------+--------+--------+---------+--------+\n` +
+          `|    KDA    |  ${chanelKDA} |  ${chrisKDA} |  ${eunjungKDA}  |  ${jamesKDA} |\n+-----------+--------+--------+---------+--------+\n` +
+          `| Frequency |   ${chanelFrequency}   |   ${chrisFrequency}   |    ${eunjungFrequency}   |   ${jamesFrequency}   |\n+-----------+--------+--------+---------+--------+\n` +
+          "```", ephemeral: true});
+        }
+   
       });
     });
 	},
