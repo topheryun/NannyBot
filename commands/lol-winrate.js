@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 var mysql = require('mysql');
+const { calculateWinRate } = require('./../functions/lol-calc');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -39,11 +40,3 @@ module.exports = {
     });
 	},
 };
-
-function calculateWinRate(result) {
-  let wins = 0;
-  for (let i = 0; i < result.length; i++) {
-    if (result[i].win == 1) wins++;
-  }
-  return (wins / result.length);
-}
