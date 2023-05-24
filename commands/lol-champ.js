@@ -31,10 +31,10 @@ module.exports = {
       "SELECT * FROM james WHERE championName = '" + input + "';"
       , function (err, results, fields) {
         if (err) throw err;
-        console.log("results:")
-        console.log(results)
-        console.log("results[0]:")
-        console.log(results[0])
+        // console.log("results:")
+        // console.log(results)
+        // console.log("results[0]:")
+        // console.log(results[0])
      
         chanelWR = formatWinRate(results[0]);
         chrisWR = formatWinRate(results[1]);
@@ -72,12 +72,18 @@ function calculateWinRate(result) {
 }
 
 function formatWinRate(result) {
+  console.log(result);
+  if (result[0] == null) return 'xx.xx%';
+
   let formattedResult = (Math.round(calculateWinRate(result) * 10000) / 100).toFixed(2) + '%';
   if (formattedResult == 'NaN%') {
     return '00.00%';
   }
   else if (formattedResult == '0.00%') {
     return '00.00%';
+  }
+  else if (formattedResult == '100.00%') {
+    return '100.0%';
   }
   return formattedResult;
 }
