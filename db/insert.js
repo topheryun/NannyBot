@@ -5,8 +5,6 @@ const { chris_puuid, chanel_puuid, eunjung_puuid, james_puuid } = require('./../
 const baseURL = "https://americas.api.riotgames.com";
 const apiKey = "RGAPI-7a04de10-b29a-48bb-84a2-55c70a1054e2";
 
-// insertMatchData(hardcodedMatchId);
-
 // get match data with matchId
 async function insertMatchData(matchId) {
   const response = await fetch(`${baseURL}/lol/match/v5/matches/${matchId}?api_key=${apiKey}`);
