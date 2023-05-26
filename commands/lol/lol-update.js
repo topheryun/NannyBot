@@ -1,8 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const fetch = require("node-fetch");
-const { RIOT_API, chris_puuid } = require('./../aram.json');
+const { RIOT_API, chris_puuid } = require('./../../aram.json');
 const baseURL = "https://americas.api.riotgames.com";
-const { insertMatchData } = require('./../db/insert');
+const { insertMatchData } = require('./../../db/insert');
 
 module.exports = {
 	data: new SlashCommandBuilder()

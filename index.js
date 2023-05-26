@@ -1,80 +1,51 @@
-const fs = require('fs');
-const { Client, Collection, Intents } = require('discord.js');
-const { ROLE_ID, TOKEN } = require('./config.json');
-// const TOKEN = process.env.TOKEN;
-// const ROLE_ID = process.env.ROLE_ID;
+const fs = require('node:fs');
+const path = require('node:path');
+const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const { TOKEN } = require('./config.json');
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
-
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const foldersPath = path.join(__dirname, 'commands');
+const commandFolders = fs.readdirSync(foldersPath);
 
-process.on('unhandledRejection', error => {
-	console.error('Unhandled promise rejection:', error);
-});
-
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	// Set a new item in the Collection
-	// With the key as the command name and the value as the exported module
-	client.commands.set(command.data.name, command);
+for (const folder of commandFolders) {
+	const commandsPath = path.join(foldersPath, folder);
+	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+	for (const file of commandFiles) {
+		const filePath = path.join(commandsPath, file);
+		const command = require(filePath);
+		// Set a new item in the Collection with the key as the command name and the value as the exported module
+		if ('data' in command && 'execute' in command) {
+			client.commands.set(command.data.name, command);
+		} else {
+			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+		}
+	}
 }
 
-client.once('ready', async () => {
-  console.log(`Logged in as ${client.user.tag}. Feed me...`);
-
-	const Guilds = client.guilds.cache.map((guild) => guild);
-	const allFetchedCommands = await Guilds[0].commands.fetch();
-	fullPermissions = [];
-
-	// console.log(allFetchedCommands);
-
-	allFetchedCommands.forEach(command => {
-		const tempCommandId = command.permissions.commandId;
-		fullPermissions.push({
-			id: tempCommandId,
-			permissions: [{
-				id: ROLE_ID,
-				type: 'ROLE',
-				permission: true
-			}]
-		});
-	})
-
-	const permissions2 = {
-		id: guild.roles.everyone.id,
-		type: 'ROLE',
-		permission: false,
-	};
-	const permissions1 =  {
-		id: botRole.id,
-		type: 'ROLE',
-		permission: true,
-	};
-	let commandsList = await guild.commands.fetch();
-	await commandsList.forEach(slashCommand => {
-		console.log(`Changing command ${slashCommand.id}`);
-		//set the permissions for each slashCommand
-		guild.commands.permissions.add({
-				command: slashCommand.id,
-				permissions: [permissions1, permissions2]
-		});
-	});
-	// await Guilds[0].commands.permissions.set({ fullPermissions });
+client.once(Events.ClientReady, c => {
+	console.log(`Ready! Logged in as ${c.user.tag}. Feed me...`);
 });
 
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isChatInputCommand()) return;
 
-	const command = client.commands.get(interaction.commandName);
+	const command = interaction.client.commands.get(interaction.commandName);
 
-	if (!command) return;
+	if (!command) {
+		console.error(`No command matching ${interaction.commandName} was found.`);
+		return;
+	}
 
 	try {
 		await command.execute(interaction);
 	} catch (error) {
 		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		if (interaction.replied || interaction.deferred) {
+			await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
+		} else {
+			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+		}
 	}
 });
 

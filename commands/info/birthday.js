@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { displayBirthday, replyBirthday, replyMultiBirthday } = require('./../functions/display');
+const { displayBirthday, replyBirthday, replyMultiBirthday } = require('../../functions/display');
 // const { JOJO_DAY, JOJO_MONTH, JOJO_YEAR } = require('./../birthdays.json');
 // const { SHILOH_DAY, SHILOH_MONTH, SHILOH_YEAR } = require('./../birthdays.json');
 // const { EZRA_DAY, EZRA_MONTH, EZRA_YEAR } = require('./../birthdays.json');
