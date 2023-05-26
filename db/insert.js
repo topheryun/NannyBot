@@ -1,13 +1,12 @@
 var mysql = require('mysql');
 const tableHeaders = "matchId, championName, win, kills, deaths, assists, kda, totalDamageDealtToChampions, damagePerMinute";
 const fetch = require("node-fetch");
-const { chris_puuid, chanel_puuid, eunjung_puuid, james_puuid } = require('./../aram.json');
+const { RIOT_API, chris_puuid, chanel_puuid, eunjung_puuid, james_puuid } = require('./../aram.json');
 const baseURL = "https://americas.api.riotgames.com";
-const apiKey = "RGAPI-7a04de10-b29a-48bb-84a2-55c70a1054e2";
 
 // get match data with matchId
 async function insertMatchData(matchId) {
-  const response = await fetch(`${baseURL}/lol/match/v5/matches/${matchId}?api_key=${apiKey}`);
+  const response = await fetch(`${baseURL}/lol/match/v5/matches/${matchId}?api_key=${RIOT_API}`);
   if (response.status == 200) {
     const data = await response.json();
     const players = data.info.participants;
