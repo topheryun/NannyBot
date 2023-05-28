@@ -57,9 +57,9 @@ module.exports = {
         "+--------------+------------+------------+------------+------------+\n" +
         `|    Damage    |    ${chanelAverageDamage}   |    ${chrisAverageDamage}   |   ${eunjungAverageDamage}    |    ${jamesAverageDamage}   |\n` +
         "+--------------+------------+------------+------------+------------+\n" +
-        `| Most Played  |${chanelFavorite}|${chrisFavorite}|${eunjungFavorite}|${jamesFavorite}|\n` +
+        `| Most Picked  |${chanelFavorite}|${chrisFavorite}|${eunjungFavorite}|${jamesFavorite}|\n` +
         "+--------------+------------+------------+------------+------------+\n" +
-        "```"});
+        "```", ephemeral: true});
       });
     });
 	},

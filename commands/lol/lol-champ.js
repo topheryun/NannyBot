@@ -60,13 +60,19 @@ module.exports = {
         }
         else {
           interaction.reply({content: `**.-${input}-.**` +
-          "```\n+------------------------------------------------+\n" + 
-          "|                 Champion Stats                 |\n+-----------+--------+--------+---------+--------+\n" + 
-          "|  Summoner | Chanel |  Chris | Eunjung |  James |\n+-----------+--------+--------+---------+--------+\n" +
-          `|  Winrate  | ${chanelWR} | ${chrisWR} |  ${eunjungWR} | ${jamesWR} |\n+-----------+--------+--------+---------+--------+\n` +
-          `|    KDA    |  ${chanelKDA} |  ${chrisKDA} |  ${eunjungKDA}  |  ${jamesKDA} |\n+-----------+--------+--------+---------+--------+\n` +
-          `| Frequency |   ${chanelFrequency}   |   ${chrisFrequency}   |    ${eunjungFrequency}   |   ${jamesFrequency}   |\n+-----------+--------+--------+---------+--------+\n` +
-          "```"});
+          "```\n" +
+          "+---------------------------------------------------+\n" + 
+          "|                   Champion Stats                  |\n" + 
+          "+--------------+--------+--------+---------+--------+\n" + 
+          "|   Summoner   | Chanel |  Chris | Eunjung |  James |\n" +
+          "+--------------+--------+--------+---------+--------+\n" +
+          `|    Winrate   | ${chanelWR} | ${chrisWR} |  ${eunjungWR} | ${jamesWR} |\n` +
+          "+--------------+--------+--------+---------+--------+\n" +
+          `|     KDA      |  ${chanelKDA} |  ${chrisKDA} |  ${eunjungKDA}  |  ${jamesKDA} |\n` +
+          "+--------------+--------+--------+---------+--------+\n" +
+          `| Games Played |   ${chanelFrequency}   |   ${chrisFrequency}   |    ${eunjungFrequency}   |   ${jamesFrequency}   |\n` +
+          "+--------------+--------+--------+---------+--------+\n" +
+          "```", ephemeral: true});
         }
    
       });
