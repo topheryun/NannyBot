@@ -66,7 +66,7 @@ module.exports = {
           `|  Winrate  | ${chanelWR} | ${chrisWR} |  ${eunjungWR} | ${jamesWR} |\n+-----------+--------+--------+---------+--------+\n` +
           `|    KDA    |  ${chanelKDA} |  ${chrisKDA} |  ${eunjungKDA}  |  ${jamesKDA} |\n+-----------+--------+--------+---------+--------+\n` +
           `| Frequency |   ${chanelFrequency}   |   ${chrisFrequency}   |    ${eunjungFrequency}   |   ${jamesFrequency}   |\n+-----------+--------+--------+---------+--------+\n` +
-          "```", ephemeral: true});
+          "```"});
         }
    
       });
