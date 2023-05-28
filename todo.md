@@ -1,4 +1,8 @@
 # things to do
+## LoL integration
+- times each skill is used
+- stats on top 5 champions
+
 ## api integration
 - [Anime](https://jikan.moe/)
 - [Poems](https://poems.one/api/poem/)
