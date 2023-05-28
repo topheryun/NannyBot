@@ -46,19 +46,19 @@ module.exports = {
         jamesFavorite = findFavorite(results[3]);
 
         interaction.reply({content: "```\n" + 
-        "+-----------+------------+------------+------------+------------+\n" +
-        "|  Summoner |   Chanel   |    Chris   |   Eunjung  |    James   |\n" +
-        "+-----------+------------+------------+------------+------------+\n" +
-        `|  Winrate  |   ${chanelWR}   |   ${chrisWR}   |   ${eunjungWR}   |   ${jamesWR}   |\n` + 
-        "+-----------+------------+------------+------------+------------+\n" +
-        `|   Games   |    ${chanelGamesPlayed}     |    ${chrisGamesPlayed}     |    ${eunjungGamesPlayed}     |    ${jamesGamesPlayed}     |\n` +
-        "+-----------+------------+------------+------------+------------+\n" +
-        `|    KDA    |   ${chanelKDA}    |   ${chrisKDA}    |   ${eunjungKDA}    |   ${jamesKDA}    |\n` +
-        "+-----------+------------+------------+------------+------------+\n" +
-        `|   Damage  |    ${chanelAverageDamage}   |    ${chrisAverageDamage}   |   ${eunjungAverageDamage}    |    ${jamesAverageDamage}   |\n` +
-        "+-----------+------------+------------+------------+------------+\n" +
-        `| Frequency |${chanelFavorite}|${chrisFavorite}|${eunjungFavorite}|${jamesFavorite}|\n` +
-        "+-----------+------------+------------+------------+------------+\n" +
+        "+--------------+------------+------------+------------+------------+\n" +
+        "|   Summoner   |   Chanel   |    Chris   |   Eunjung  |    James   |\n" +
+        "+--------------+------------+------------+------------+------------+\n" +
+        `|   Winrate    |   ${chanelWR}   |   ${chrisWR}   |   ${eunjungWR}   |   ${jamesWR}   |\n` + 
+        "+--------------+------------+------------+------------+------------+\n" +
+        `|    Games     |    ${chanelGamesPlayed}     |    ${chrisGamesPlayed}     |    ${eunjungGamesPlayed}     |    ${jamesGamesPlayed}     |\n` +
+        "+--------------+------------+------------+------------+------------+\n" +
+        `|     KDA      |   ${chanelKDA}    |   ${chrisKDA}    |   ${eunjungKDA}    |   ${jamesKDA}    |\n` +
+        "+--------------+------------+------------+------------+------------+\n" +
+        `|    Damage    |    ${chanelAverageDamage}   |    ${chrisAverageDamage}   |   ${eunjungAverageDamage}    |    ${jamesAverageDamage}   |\n` +
+        "+--------------+------------+------------+------------+------------+\n" +
+        `| Games Played |${chanelFavorite}|${chrisFavorite}|${eunjungFavorite}|${jamesFavorite}|\n` +
+        "+--------------+------------+------------+------------+------------+\n" +
         "```"});
       });
     });
