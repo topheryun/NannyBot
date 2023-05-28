@@ -57,7 +57,7 @@ module.exports = {
         "+--------------+------------+------------+------------+------------+\n" +
         `|    Damage    |    ${chanelAverageDamage}   |    ${chrisAverageDamage}   |   ${eunjungAverageDamage}    |    ${jamesAverageDamage}   |\n` +
         "+--------------+------------+------------+------------+------------+\n" +
-        `| Games Played |${chanelFavorite}|${chrisFavorite}|${eunjungFavorite}|${jamesFavorite}|\n` +
+        `| Most Played  |${chanelFavorite}|${chrisFavorite}|${eunjungFavorite}|${jamesFavorite}|\n` +
         "+--------------+------------+------------+------------+------------+\n" +
         "```"});
       });
